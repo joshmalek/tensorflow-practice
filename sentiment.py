@@ -63,6 +63,19 @@ model.compile(loss='binary_crossentropy',optimizer='adam',metrics=['accuracy'])
 model.summary()
 
 #number of epochs to train the model for (more = better,longer training time)
-#after 30 epochs we have hit 99.23% accuracy
+#after 30 epochs we have hit 99.23% accuracy on training data, and 81.46% on the
+#test data, or words it hasn't seen.
 num_epochs = 30
 history = model.fit(training_padded, training_labels, epochs=num_epochs, validation_data=(testing_padded, testing_labels), verbose=2)
+
+
+sentence = [
+    "granny starting to fear spiders in the garden might be real",
+    "the weather today is bright and sunny"
+]
+
+sequences = tokenizer.texts_to_sequences(sentence)
+padded = pad_sequences(sequences,maxlen=max_length,padding=padding_type,truncating=trunc_type)
+# Our model predicts the first sentence close to 1, which means a high probability of sarcasm,
+# and our second sentence registers very close zero, or no probabilty of sarcasm.
+print(model.predict(padded))
