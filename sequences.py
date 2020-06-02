@@ -1,4 +1,5 @@
 from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 sentences = [
     'I love my dog',
@@ -14,14 +15,14 @@ word_index = tokenizer.word_index
 #pages word index to construct sequences for each sentence
 sequences = tokenizer.texts_to_sequences(sentences)
 
-test_data = [
-    'i really love my dog',
-    'my dog loves my manatee'
-]
-test_seq = tokenizer.texts_to_sequences(test_data)
+#padding makes it so that all sentences are the same length, for training the neural network
+#to add padding to the end of the sentences, pad_sequences(sequences,padding='post')
+padded = pad_sequences(sequences)
 
-print()
-print() 
+print(word_index)
+print()  
 print(sequences)
-print(test_seq)
 print()
+print(padded)
+
+
