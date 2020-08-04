@@ -22,4 +22,13 @@ test_images = test_images/255.0
 # Our output layer will be 10 neurons, each representing one item of clothing from class_names.
 # We will have a hidden layer with 128 neurons
 
-model = keras.Sequential([])
+model = keras.Sequential([
+  # We want to flatten our data (move data inside nested arrays to one big list) for our input layer of 784 neurons
+  keras.layers.Flatten(input_shape=(28,28)),
+  # Our hidden layer has 128 neurons, using the Rectified Linear Unit activation function
+  keras.layers.Dense(128,activation="relu"),
+  # Our output layer has 10 neurons, using the softmax activation function
+  kears.layers.Dense(10, activation="softmax")
+])
+
+model.compile(optimizer = "adam", loss= "sparse_categorical_crossentropy", metrics = ["accuracy"])
