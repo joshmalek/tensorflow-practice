@@ -22,6 +22,7 @@ test_images = test_images/255.0
 # Our output layer will be 10 neurons, each representing one item of clothing from class_names.
 # We will have a hidden layer with 128 neurons
 
+# keras.sequential means a sequence of layers.
 model = keras.Sequential([
   # We want to flatten our data (move data inside nested arrays to one big list) for our input layer of 784 neurons
   keras.layers.Flatten(input_shape=(28,28)),
@@ -31,4 +32,27 @@ model = keras.Sequential([
   kears.layers.Dense(10, activation="softmax")
 ])
 
+#add some different optimizers and loss functions
 model.compile(optimizer = "adam", loss= "sparse_categorical_crossentropy", metrics = ["accuracy"])
+
+# actually start to train our model for 5 epochs (epoch = how many times you see the same image)
+model.fit(train_images, train_labels, epochs=5)
+
+# get loss and accuracy statistics for our model
+test_loss, test_acc = model.evaluate(test_images, test_labels)
+print("Tested Acc:", test_acc)
+
+# How can we actually use our model now?  We can export, or use model.predict, which expects a list.
+prediction = model.predict(test_images)
+
+# print out 5 images, and show what the model thinks it is.
+for i in range(5):
+  plt.grid(False)
+  plt.imshow(test_images[i], cmap=plt.cm.binary)
+  plt.xlabel("Actual: " + class_names[test_labels[i]])
+  #find the index of the neuron with the highest value, and print out the item of clothing.
+  plt.title("Prediction: " + prediction[class_names[np.argmax(prediction[i])]]
+  plt.show()
+print()
+
+
