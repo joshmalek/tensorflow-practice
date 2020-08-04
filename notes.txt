@@ -1,0 +1,8 @@
+Neural Network Notes:
+Layer: Container of neurons
+Input layer: takes numerical input in and has weights associated with those inputs.  The inputs pass into the neuron and the output is the Activation Function.
+Hidden layer: 
+Weights and Bias are adjusted throughout the training period to allow the neural network to tune the output layer based on the input layers.
+Activation function: Non-linear function that allows you to add a degree of complexity to your network, as opposed to a linear function, somewhat alike a sigmoid function.
+-> types of AF: Rectified linear unit (ReLu), Sigmoid function
+Loss function: Way of calculating error (mean squared error), we use because we want a higher degree of complexity
